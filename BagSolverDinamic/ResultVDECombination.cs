@@ -24,6 +24,19 @@ namespace BagSolverDinamic
             MinPointDistance = minPointDistance;
             _resultInfos = new List<VDEInfo> { };
         }
+        public bool CanAddInfo(List<VDEInfo> infos)
+        {
+            if (infos.Count ==0)
+            {
+                return false;
+            }
+            foreach (var info in infos)
+            {
+                if (CanAddInfo(info) == false)
+                    return false;
+            }
+            return true;
+        }
 
         public bool CanAddInfo(VDEInfo info)
         {
@@ -58,7 +71,7 @@ namespace BagSolverDinamic
         }
         private double CalculateDistance(Point point1, Point point2)
         {
-            return Math.Sqrt(Math.Pow(point1.X - point1.X, 2) + Math.Pow(point1.Y - point1.Y, 2));
+            return Math.Sqrt(Math.Pow(point1.X - point2.X, 2) + Math.Pow(point1.Y - point2.Y, 2));
         }
         public void AddInfo(VDEInfo info)
         {

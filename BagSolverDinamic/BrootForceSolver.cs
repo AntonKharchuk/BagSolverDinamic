@@ -33,6 +33,7 @@ namespace BagSolverDinamic
         {
             foreach (var resultVDECombination in resultVDECombinations)
             {
+                Console.WriteLine($"Max Power = {resultVDECombination.CurrentPower}");
                 Console.WriteLine(resultVDECombination.ToString());
             }
         }

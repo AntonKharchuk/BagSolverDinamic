@@ -31,7 +31,7 @@ namespace BagSolverDinamic
             Point point3 = new Point
             {
                 X = 5,
-                Y = 12,
+                Y = 20,
             };
 
             Place place1 = new Place
@@ -112,6 +112,144 @@ namespace BagSolverDinamic
                 Id = 2,
                 Place = place3,
                 Power = 32,
+            });
+
+        }
+        public void AddTestSmallDataToVDE()
+        {
+            Point point1 = new Point
+            {
+                X = 2,
+                Y = 14,
+            };
+            Point point2 = new Point
+            {
+                X = 3,
+                Y = 19,
+            };
+           
+            Place place1 = new Place
+            {
+                Id = 1,
+                Point = point1,
+            };
+            Place place2 = new Place
+            {
+                Id = 2,
+                Point = point2,
+            };
+           
+
+
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 1,
+                Id = 1,
+                Place = place1,
+                Power = 1,
+            });
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 3,
+                Id = 2,
+                Place = place1,
+                Power = 4,
+            });
+
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 3,
+                Id = 1,
+                Place = place2,
+                Power = 3,
+            });
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 5,
+                Id = 2,
+                Place = place2,
+                Power = 5,
+            });
+        }
+
+        public void AddTest2DataToVDE()
+        {
+            Point point1 = new Point
+            {
+                X = 2,
+                Y = 14,
+            };
+            Point point2 = new Point
+            {
+                X = 3,
+                Y = 19,
+            };
+            Point point3 = new Point
+            {
+                X = 5,
+                Y = 20,
+            };
+
+            Place place1 = new Place
+            {
+                Id = 1,
+                Point = point1,
+            };
+            Place place2 = new Place
+            {
+                Id = 2,
+                Point = point2,
+            };
+            Place place3 = new Place
+            {
+                Id = 3,
+                Point = point3,
+            };
+
+           
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 5,
+                Id = 1,
+                Place = place1,
+                Power = 5,
+            });
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 10,
+                Id = 2,
+                Place = place1,
+                Power = 10,
+            });
+            
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 11,
+                Id = 1,
+                Place = place2,
+                Power = 11,
+            });
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 12,
+                Id = 2,
+                Place = place2,
+                Power = 12,
+            });
+           
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 15,
+                Id = 3,
+                Place = place3,
+                Power = 15,
+            });
+            VDEInfos.Add(new VDEInfo
+            {
+                Cost = 16,
+                Id = 2,
+                Place = place3,
+                Power = 16,
             });
 
         }

@@ -1,5 +1,6 @@
 ﻿
 using System.Runtime.CompilerServices;
+using BagSolverDinamic.MyModels;
 
 namespace BagSolverDinamic
 {

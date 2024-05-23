@@ -1,5 +1,4 @@
-﻿
-namespace BagSolverDinamic
+﻿namespace BagSolverDinamic.MyModels
 {
     public class Place
     {

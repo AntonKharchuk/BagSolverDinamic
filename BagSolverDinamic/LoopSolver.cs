@@ -1,5 +1,6 @@
 ﻿
 using System.Net.Http.Headers;
+using BagSolverDinamic.MyModels;
 
 namespace BagSolverDinamic
 {

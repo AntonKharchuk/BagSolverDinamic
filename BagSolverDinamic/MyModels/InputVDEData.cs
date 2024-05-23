@@ -1,4 +1,6 @@
 ﻿
+using BagSolverDinamic.MyModels;
+
 namespace BagSolverDinamic
 {
     public class InputVDEData

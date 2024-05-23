@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BagSolverDinamic;
-
+using BagSolverDinamic.MyModels;
 using System.Net.Http.Headers;
 
 Console.WriteLine("Hello, World!");

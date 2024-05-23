@@ -27,7 +27,7 @@ namespace BagSolverDinamic
 
         public void CalculateEachCostBestRecord()
         {
-            //int currentCost, int leftCost, int currentLowerThanLeftCost, int currentVDEIndex
+            
 
             int currentCost = 0;
 
@@ -45,19 +45,11 @@ namespace BagSolverDinamic
 
                     if (currentBestCombination.CanAddInfo(_inputVDEData.VDEInfos[currentVDEIndex]))//if can buy current VDE
                     {
-                        if (_inputVDEData.VDEInfos[currentVDEIndex].Cost==9)
-                        {
-
-                        }
                         currentBestCombination.AddInfo(_inputVDEData.VDEInfos[currentVDEIndex]);//Add VDE to combination
                         leftCost = (int)(leftCost - _inputVDEData.VDEInfos[currentVDEIndex].Cost);//make left cost
                         currentLowerThanLeftCost = leftCost;//set rest cost = left cost
                     }
-                    if (currentLowerThanLeftCost ==17)
-                    {
-
-                    }
-
+                   
                     while (currentLowerThanLeftCost > 0)//while there is money to waste
                     {//try to get record we can add to combination
                         bool recordWithThisCostFound = false;//add variable that represents if recordWithThisCostFound
@@ -67,15 +59,12 @@ namespace BagSolverDinamic
                             {
                                 foreach (var info in record.ResultInfos)//add all record infos for this cost
                                 {
-                                    if (info.Cost == 5)
-                                    {
-
-                                    }
                                     currentBestCombination.AddInfo(info);
                                 }
                                 leftCost = leftCost - (int)record.CurrentCost;//minus total cost from leftCost
                                 currentLowerThanLeftCost = leftCost;//set rest cost = left cost
                                 recordWithThisCostFound = true;//set that pair is found
+                                break;
                             }
                         }
                         if (!recordWithThisCostFound)//if pair is not found 
@@ -106,6 +95,15 @@ namespace BagSolverDinamic
                     currentVDEIndex++;
                 }
                 currentCost++;
+            }
+        }
+
+        public void ShowVDEInfos(List<ResultVDECombination> resultVDECombinations)
+        {
+            foreach (var resultVDECombination in resultVDECombinations)
+            {
+                Console.WriteLine($"Max Power = {resultVDECombination.CurrentPower}");
+                Console.WriteLine(resultVDECombination.ToString());
             }
         }
 

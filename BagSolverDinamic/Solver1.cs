@@ -34,55 +34,6 @@ namespace BagSolverDinamic
 
             void Helper(int currentCost, int leftCost, int currentLowerThanLeftCost, int currentVDEIndex, ResultVDECombination currentBestCombination)
             {
-                if (_eachCostBestRecord.Count == 10)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 15)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 20)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 25)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 30)
-                {
-
-                }
-                if (_eachCostBestRecord.Count==35)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 41)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 45)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 47)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 48)
-                {
-
-                }
-                if (_eachCostBestRecord.Count == 50)
-                {
-
-                }
-
-                if (_eachCostBestRecord.Count == 60)
-                {
-
-                }
                 if (leftCost == 0| currentLowerThanLeftCost==0)
                 {
                     if (_eachCostBestRecord[currentCost].SetOfSelectedVDEs.Count ==0)//if record is not set

@@ -73,7 +73,7 @@ namespace BagSolverDinamic
             _eachCostBestRecord = new List<BestCostRecord>();
         }
 
-        public Solution CalculateEachCostBestRecord()
+        public BagSolution CalculateEachCostBestRecord()
         {
             int currentCost = 0;
 
@@ -157,10 +157,10 @@ namespace BagSolverDinamic
             }
 
 
-            var Solution = new Solution()
+            var Solution = new BagSolution()
             {
                 LocAndUnit = locAndUnit,
-                Power = EachCostBestRecord[(int)_maxCost].SetOfSelectedVDEs[0].CurrentCost
+                Power = EachCostBestRecord[(int)_maxCost].SetOfSelectedVDEs[0].CurrentPower
             };
 
             return Solution;

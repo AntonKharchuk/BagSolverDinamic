@@ -223,24 +223,26 @@ else if (answer == "2")
     double avgError = 0;
 
     using var streamWriter = new StreamWriter("Result.txt", true);
+    var generator = new TaskGenerator(locations, units, budget, minDist, streamWriter);
+
     for (int i = 0; i < tasks; i++)
     {
 
-        var generator = new TaskGenerator(locations, units, budget, minDist, streamWriter);
         var task = generator.Generate();
 
         Console.WriteLine(task.ToString());
 
-
         var denInputBagSolver = new BagSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, streamWriter);
 
-        Console.WriteLine("LoopSolver");
-        Console.WriteLine("--------------");
+        var bagResult = denInputBagSolver.CalculateEachCostBestRecord();
 
+        Console.WriteLine(bagResult.ToString());
 
-         var result = denInputBagSolver.CalculateEachCostBestRecord();
+        var antSlver = new AntColonyOptimizator(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, streamWriter, evaporationRate);
 
-        Console.WriteLine(result.ToString());
+        var antResult = antSlver.Optimize(30, 100);
+
+        Console.WriteLine(antResult.ToString());
     }
 }
 else if (answer == "3")

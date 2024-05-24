@@ -1,4 +1,6 @@
 ﻿
+using BagSolverDinamic.DenModels;
+
 namespace BagSolverDinamic
 {
     public class BagSolver
@@ -71,10 +73,8 @@ namespace BagSolverDinamic
             _eachCostBestRecord = new List<BestCostRecord>();
         }
 
-        public void CalculateEachCostBestRecord()
+        public Solution CalculateEachCostBestRecord()
         {
-
-
             int currentCost = 0;
 
             while (currentCost <= _maxCost) //while cost is smaller than max
@@ -145,6 +145,25 @@ namespace BagSolverDinamic
 
             //actions after calculation
 
+
+            var FirstBestRecord = EachCostBestRecord[(int)_maxCost].SetOfSelectedVDEs[0].ResultInfos;
+
+            int[,] locAndUnit = new int[FirstBestRecord.Count, 2];
+
+            for (int i = 0; i < locAndUnit.GetLength(0); i++)
+            {
+                locAndUnit[i, 0] = FirstBestRecord[i].Place.Id;
+                locAndUnit[i, 1] = FirstBestRecord[i].Id;
+            }
+
+
+            var Solution = new Solution()
+            {
+                LocAndUnit = locAndUnit,
+                Power = EachCostBestRecord[(int)_maxCost].SetOfSelectedVDEs[0].CurrentCost
+            };
+
+            return Solution;
         }
 
 

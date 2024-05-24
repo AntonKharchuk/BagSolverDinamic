@@ -71,9 +71,33 @@ namespace BagSolverDinamic
 
             //parse to AntSolution 
 
-            var solution = new AntSolution()
+
+            var locs = new List<int>();
+            var units = new List<int>();
+
+            for (int i = 0; i < numLocations; i++)
             {
-                LocAndUnit = currentBestSolution,
+                for (int j = 0; j < numUnits; j++)
+                {
+                    if (currentBestSolution[i,j] == 1)
+                    {
+                        locs.Add(i);
+                        units.Add(j);
+                        break;
+                    }
+                }
+            }
+            int[,] locAndUnit = new int[locs.Count, 2];
+            for (int i = 0; i < locAndUnit.GetLength(0); i++)
+            {
+                locAndUnit[i, 0] = locs[i];
+                locAndUnit[i, 1] = units[i];
+            }
+
+
+                var solution = new AntSolution()
+            {
+                LocAndUnit = locAndUnit,
                 Power = currentBestSolutionPower
             };
 

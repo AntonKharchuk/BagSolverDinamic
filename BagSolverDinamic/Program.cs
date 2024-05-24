@@ -243,6 +243,13 @@ else if (answer == "2")
         var antResult = antSlver.Optimize(30, 100);
 
         Console.WriteLine(antResult.ToString());
+
+
+        var evoSolver = new EvoSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
+
+        var evoResult = evoSolver.Solve();
+        Console.WriteLine(evoResult.ToString());
+
     }
 }
 else if (answer == "3")

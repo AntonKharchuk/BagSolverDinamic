@@ -149,8 +149,8 @@ namespace BagSolverDinamic
 
             for (int i = 0; i < locAndUnit.GetLength(0); i++)
             {
-                locAndUnit[i, 0] = FirstBestRecord[i].Place.Id;
-                locAndUnit[i, 1] = FirstBestRecord[i].Id;
+                locAndUnit[i, 0] = FirstBestRecord[i].Place.Id-1;
+                locAndUnit[i, 1] = FirstBestRecord[i].Id-1;
             }
 
 

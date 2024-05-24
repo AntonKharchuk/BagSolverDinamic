@@ -9,7 +9,7 @@ namespace BagSolverDinamic
         private readonly int budget;
         private readonly double minDistance;
 
-        public TaskGenerator(int locations, int units, int budget, int minDist, StreamWriter writer)
+        public TaskGenerator(int locations, int units, int budget, int minDist)
         {
             this.locations = locations;
             this.units = units;

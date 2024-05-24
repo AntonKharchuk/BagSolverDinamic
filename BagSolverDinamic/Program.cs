@@ -133,7 +133,17 @@ if (answer == "1")
         Console.WriteLine("Wrong input");
     }
 
-    using var streamWriter = new StreamWriter("Result.txt");
+
+    var selfSetTask = new BagSolverDinamic.DenModels.Task
+    {
+        Locations = locations,
+        Costs = costs,
+        Powers = powers,
+        Budget = budget,
+        MinDist = minDist,
+    };
+
+    RunSolvers(evaporationRate, selfSetTask);
 
     //run solver
     //var aco = new AntColonyOptimizator(locations, costs, powers, budget, minDist, streamWriter, evaporationRate);
@@ -222,33 +232,13 @@ else if (answer == "2")
 
     double avgError = 0;
 
-    using var streamWriter = new StreamWriter("Result.txt", true);
-    var generator = new TaskGenerator(locations, units, budget, minDist, streamWriter);
+    var generator = new TaskGenerator(locations, units, budget, minDist);
 
     for (int i = 0; i < tasks; i++)
     {
 
         var task = generator.Generate();
-
-        Console.WriteLine(task.ToString());
-
-        var denInputBagSolver = new BagSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
-
-        var bagResult = denInputBagSolver.CalculateEachCostBestRecord();
-
-        Console.WriteLine(bagResult.ToString());
-
-        var antSlver = new AntColonyOptimizator(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, evaporationRate);
-
-        var antResult = antSlver.Optimize(30, 100);
-
-        Console.WriteLine(antResult.ToString());
-
-
-        var evoSolver = new EvoSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
-
-        var evoResult = evoSolver.Solve();
-        Console.WriteLine(evoResult.ToString());
+        RunSolvers(evaporationRate, task);
 
     }
 }
@@ -317,7 +307,17 @@ else if (answer == "3")
                     break;
             }
         }
-        using var streamWriter = new StreamWriter("Result.txt");
+
+        var selfSetTask = new BagSolverDinamic.DenModels.Task
+        {
+            Locations = locations,
+            Costs = costs,
+            Powers = powers,
+            Budget = budget,
+            MinDist = minDist,
+        };
+
+        RunSolvers(evaporationRate, selfSetTask);
         //run solver
         //var aco = new AntColonyOptimizator(locations, costs, powers, budget, minDist, streamWriter, evaporationRate);
         //aco.Optimize(ants, iterations);
@@ -353,3 +353,31 @@ static double[,] ReadMatrix(ref int i, string[] lines)
     return matrix;
 }
 
+static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task task)
+{
+    using var streamWriter = new StreamWriter("Result.txt");
+
+    Console.WriteLine(task.ToString());
+    streamWriter.WriteLine(task.ToString());
+
+    var denInputBagSolver = new BagSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
+
+    var bagResult = denInputBagSolver.CalculateEachCostBestRecord();
+
+    Console.WriteLine(bagResult.ToString());
+    streamWriter.WriteLine(bagResult.ToString());
+
+    var antSlver = new AntColonyOptimizator(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, evaporationRate);
+
+    var antResult = antSlver.Optimize(30, 100);
+
+    Console.WriteLine(antResult.ToString());
+    streamWriter.WriteLine(antResult.ToString());
+
+
+    var evoSolver = new EvoSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
+
+    var evoResult = evoSolver.Solve();
+    Console.WriteLine(antResult.ToString());
+    streamWriter.WriteLine(evoResult.ToString());
+}

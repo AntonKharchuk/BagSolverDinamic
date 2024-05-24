@@ -18,7 +18,7 @@ namespace BagSolverDinamic
             private set { }
         }
 
-        public ResultVDECombination(int maxCost, int minPointDistance)
+        public ResultVDECombination(int maxCost, double minPointDistance)
         {
             MaxCost = maxCost;
             CurrentCost = 0;

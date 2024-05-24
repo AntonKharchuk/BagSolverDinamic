@@ -378,6 +378,12 @@ static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task t
     var evoSolver = new EvoSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
 
     var evoResult = evoSolver.Solve();
-    Console.WriteLine(antResult.ToString());
+    Console.WriteLine(evoResult.ToString());
     streamWriter.WriteLine(evoResult.ToString());
+
+
+    var greSolver = new GreSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
+    var greResult = greSolver.Solve();
+    Console.WriteLine(greResult.ToString());
+    streamWriter.WriteLine(greResult.ToString());
 }

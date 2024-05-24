@@ -43,7 +43,7 @@ namespace BagSolverDinamic.DenModels
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("BagSolution");
+            sb.AppendLine("AntSolution");
 
             sb.AppendLine($"Founded solution is {Power} units of power. Placement:");
 
@@ -79,6 +79,23 @@ namespace BagSolverDinamic.DenModels
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("EvoSolution");
+
+            sb.AppendLine($"Founded solution is {Power} units of power. Placement:");
+
+            for (int i = 0; i < LocAndUnit.GetLength(0); i++)
+            {
+                sb.AppendLine($"Location: {LocAndUnit[i, 0]}  VDEid: {LocAndUnit[i, 1]}");
+            }
+
+            return sb.ToString();
+        }
+    }
+    public class GreSolution : Solution
+    {
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("GreSolution");
 
             sb.AppendLine($"Founded solution is {Power} units of power. Placement:");
 

@@ -1,6 +1,6 @@
 ﻿using BagSolverDinamic;
 
-Console.WriteLine("Choose mode (1 - data entered in program, 2 - generated data, 3 - data from file):");
+Console.WriteLine("Choose mode (1 - data entered in program, 2 - generated data, 3 - data from file, 4 - generated data in the range):");
 var answer = Console.ReadLine();
 
 double evaporationRate = 0.05;  // Швидкість випаровування феромону
@@ -202,6 +202,10 @@ else if (answer == "2")
     try
     {
         units = int.Parse(Console.ReadLine()!);
+        if (units<2)
+        {
+            throw new IndexOutOfRangeException();
+        }
     }
     catch (Exception)
     {
@@ -328,6 +332,153 @@ else if (answer == "3")
     }
 
 }
+else if (answer == "4")
+{
+    Console.WriteLine("Enter number of ants");
+    int ants = 0;
+    try
+    {
+        ants = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    Console.WriteLine("Enter number of iterations");
+    int iterations = 0;
+    try
+    {
+        iterations = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    Console.WriteLine("Enter number of tasks: ");
+
+    int tasks = 0;
+
+    try
+    {
+        tasks = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    Console.WriteLine("Enter min number of locations:");
+    int locationsFrom = 0;
+    try
+    {
+        locationsFrom = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+    Console.WriteLine("Enter max number of locations:");
+
+    int locationsTo = 0;
+    try
+    {
+        locationsTo = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+    Console.WriteLine("Enter locations change step:");
+
+    int locationsStep = 0;
+    try
+    {
+        locationsStep = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    Console.WriteLine("Enter min number of units:");
+    int unitsFrom = 0;
+    try
+    {
+        unitsFrom = int.Parse(Console.ReadLine()!);
+        if (unitsFrom<2)
+        {
+            throw new IndexOutOfRangeException();
+        }
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+    Console.WriteLine("Enter max number of units:");
+
+    int unitsTo = 0;
+    try
+    {
+        unitsTo = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+    Console.WriteLine("Enter units change step:");
+
+    int unitsStep = 0;
+    try
+    {
+        unitsStep = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    Console.WriteLine("Enter budget:");
+    int budget = 0;
+    try
+    {
+        budget = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    Console.WriteLine("Enter minimal distance between VDEs:");
+    int minDist = 0;
+    try
+    {
+        minDist = int.Parse(Console.ReadLine()!);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Wrong input");
+    }
+
+    double avgError = 0;
+
+    for (int loc = locationsFrom; loc < locationsTo; loc +=locationsStep)
+    {
+        for (int unit = unitsFrom; unit < unitsTo; unit += unitsStep)
+        {
+
+            for (int i = 0; i < tasks; i++)
+            {
+                var generator = new TaskGenerator(loc, unit, budget, minDist);
+
+                var task = generator.Generate();
+                RunSolvers(evaporationRate, task);
+            }
+        }
+    }
+}
+
 else
 {
     Console.WriteLine("Wrong input");
@@ -355,7 +506,7 @@ static double[,] ReadMatrix(ref int i, string[] lines)
 
 static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task task)
 {
-    using var streamWriter = new StreamWriter("Result.txt");
+    using var streamWriter = new StreamWriter("Result.txt",true);
 
     Console.WriteLine(task.ToString());
     streamWriter.WriteLine(task.ToString());

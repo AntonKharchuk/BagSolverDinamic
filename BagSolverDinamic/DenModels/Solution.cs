@@ -14,8 +14,6 @@ namespace BagSolverDinamic.DenModels
 
             sb.AppendLine($"Founded solution is {Power} units of power. Placement:");
 
-            sb.AppendLine();
-
             for (int i = 0; i < LocAndUnit.GetLength(0); i++)
             {
                 sb.AppendLine();

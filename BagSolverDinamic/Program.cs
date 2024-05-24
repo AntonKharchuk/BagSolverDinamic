@@ -232,13 +232,13 @@ else if (answer == "2")
 
         Console.WriteLine(task.ToString());
 
-        var denInputBagSolver = new BagSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, streamWriter);
+        var denInputBagSolver = new BagSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
 
         var bagResult = denInputBagSolver.CalculateEachCostBestRecord();
 
         Console.WriteLine(bagResult.ToString());
 
-        var antSlver = new AntColonyOptimizator(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, streamWriter, evaporationRate);
+        var antSlver = new AntColonyOptimizator(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, evaporationRate);
 
         var antResult = antSlver.Optimize(30, 100);
 

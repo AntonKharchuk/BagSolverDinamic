@@ -8,7 +8,6 @@ namespace BagSolverDinamic
         private readonly int units;
         private readonly int budget;
         private readonly double minDistance;
-        private readonly StreamWriter _writer;
 
         public TaskGenerator(int locations, int units, int budget, int minDist, StreamWriter writer)
         {
@@ -16,7 +15,6 @@ namespace BagSolverDinamic
             this.units = units;
             this.budget = budget;
             this.minDistance = minDist;
-            _writer = writer;
         }
 
         public DenModels.Task Generate()

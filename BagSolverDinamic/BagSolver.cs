@@ -10,7 +10,6 @@ namespace BagSolverDinamic
         private double _maxCost;
         private double _minPointDistance;
 
-        private readonly StreamWriter _writer;
         private readonly List<VDEInfo> _inputVDEInfos;
 
         public List<BestCostRecord> EachCostBestRecord
@@ -24,8 +23,7 @@ namespace BagSolverDinamic
                                 double[,] costs,
                                 double[,] powers,
                                 double totalBudget,
-                                double minDist,
-                                StreamWriter writer
+                                double minDist
                                 )
         {
             if (costs.GetLength(0) != powers.GetLength(0) || costs.GetLength(1) != powers.GetLength(1))
@@ -37,7 +35,6 @@ namespace BagSolverDinamic
             var  numUnits = costs.GetLength(1);
             _minPointDistance = minDist;
             _maxCost = totalBudget;
-            _writer = writer;
 
             _inputVDEInfos = new List<VDEInfo>();
 

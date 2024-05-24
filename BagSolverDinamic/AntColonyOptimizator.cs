@@ -15,7 +15,6 @@ namespace BagSolverDinamic
         private readonly double alpha;  // Вплив феромону
         private readonly double budget;
         private readonly Random rand = new();
-        private readonly StreamWriter _writer;
 
         private readonly double[,] precountedDists;
 
@@ -24,7 +23,6 @@ namespace BagSolverDinamic
                                     double[,] powers,
                                     double totalBudget,
                                     double minDist,
-                                    StreamWriter writer,
                                     double evaporationRate = 0.05)
         {
             if (costs.GetLength(0) != powers.GetLength(0) || costs.GetLength(1) != powers.GetLength(1))
@@ -40,7 +38,6 @@ namespace BagSolverDinamic
             this.minDist = minDist;
             this.evaporationRate = evaporationRate;
             budget = totalBudget;
-            _writer = writer;
 
             alpha = 1;
 

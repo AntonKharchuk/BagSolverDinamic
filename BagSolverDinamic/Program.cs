@@ -241,23 +241,7 @@ else if (answer == "2")
          var result = denInputBagSolver.CalculateEachCostBestRecord();
 
         Console.WriteLine(result.ToString());
-
-
-        //ShowVDEInfos(denInputBagSolver.EachCostBestRecord[(int)task.Budget].SetOfSelectedVDEs);
-
-        void ShowVDEInfos(List<ResultVDECombination> resultVDECombinations)
-        {
-            foreach (var resultVDECombination in resultVDECombinations)
-            {
-                Console.WriteLine($"Max Power = {resultVDECombination.CurrentPower}");
-                Console.WriteLine(resultVDECombination.ToString());
-            }
-        }
-
     }
-
-    Console.WriteLine(tasks + " tasks finished with avarage error " + avgError);
-    streamWriter.WriteLine(tasks + " tasks finished with avarage error " + avgError);
 }
 else if (answer == "3")
 {

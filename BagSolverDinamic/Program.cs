@@ -143,8 +143,12 @@ switch (answer)
                 Budget = budget,
                 MinDist = minDist,
             };
-
-            RunSolvers(evaporationRate, selfSetTask, ants, iterations);
+            double avgBagError = 0;
+            double avgAntError = 0;
+            double avgEvoError = 0;
+            double avgGreError = 0;
+            RunSolvers(evaporationRate, selfSetTask, ants, iterations, ref avgBagError, ref avgAntError, ref avgEvoError, ref avgGreError);
+            PrintAvgError(avgBagError, avgAntError, avgEvoError, avgGreError);
             break;
         }
     case "2":
@@ -240,7 +244,13 @@ switch (answer)
             {
 
                 var task = generator.Generate();
-                RunSolvers(evaporationRate, task, ants, iterations);
+
+                double avgBagError = 0;
+                double avgAntError = 0;
+                double avgEvoError = 0;
+                double avgGreError = 0;
+                RunSolvers(evaporationRate, task, ants, iterations, ref avgBagError, ref avgAntError, ref avgEvoError, ref avgGreError);
+                PrintAvgError(avgBagError, avgAntError, avgEvoError, avgGreError);
             }
 
             break;
@@ -320,7 +330,13 @@ switch (answer)
                     MinDist = minDist,
                 };
 
-                RunSolvers(evaporationRate, selfSetTask, ants, iterations);
+
+                double avgBagError = 0;
+                double avgAntError = 0;
+                double avgEvoError = 0;
+                double avgGreError = 0;
+                RunSolvers(evaporationRate, selfSetTask, ants, iterations, ref avgBagError, ref avgAntError, ref avgEvoError, ref avgGreError);
+                PrintAvgError(avgBagError, avgAntError, avgEvoError, avgGreError);
             }
             catch (Exception ex)
             {
@@ -470,7 +486,13 @@ switch (answer)
                         var generator = new TaskGenerator(loc, unit, budget, minDist);
 
                         var task = generator.Generate();
-                        RunSolvers(evaporationRate, task, ants, iterations);
+
+                        double avgBagError = 0;
+                        double avgAntError = 0;
+                        double avgEvoError = 0;
+                        double avgGreError = 0;
+                        RunSolvers(evaporationRate, task, ants, iterations, ref avgBagError, ref avgAntError, ref avgEvoError, ref avgGreError);
+                        PrintAvgError(avgBagError, avgAntError, avgEvoError, avgGreError);
                     }
                 }
             }
@@ -501,8 +523,16 @@ static double[,] ReadMatrix(ref int i, string[] lines)
     i--;
     return matrix;
 }
+static void PrintAvgError(double avgBagError, double avgAntError, double avgEvoError, double avgGreError)
+{
+    Console.WriteLine($"Current Bag Solver Error: {avgBagError}");
+    Console.WriteLine($"Current Ant Solver Error: {avgAntError}");
+    Console.WriteLine($"Current Evolution Solver Error: {avgEvoError}");
+    Console.WriteLine($"Current Bag Solver Error: {avgGreError}");
 
-static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task task, int ants, int antsIterations)
+}
+
+static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task task, int ants, int antsIterations, ref double avgBagError, ref double avgAntError, ref double avgEvoError, ref double avgGreError)
 {
     using var streamWriter = new StreamWriter("Result.txt", true);
 
@@ -513,8 +543,15 @@ static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task t
 
     var bagResult = denInputBagSolver.CalculateEachCostBestRecord();
 
+    var correctPValue = bagResult.Power;
+
     Console.WriteLine(bagResult.ToString());
     streamWriter.WriteLine(bagResult.ToString());
+
+    var bagError = Math.Abs(correctPValue / bagResult.Power * 100 - 100);
+    avgBagError = (avgBagError + bagError) / 2;
+
+    Console.WriteLine($"Current Error: {bagError}");
 
     var antSlver = new AntColonyOptimizator(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist, evaporationRate);
 
@@ -524,6 +561,14 @@ static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task t
     streamWriter.WriteLine(antResult.ToString());
 
 
+    var antError = Math.Abs(correctPValue / antResult.Power * 100 - 100);
+    avgAntError = (avgAntError + antError) / 2;
+
+
+    Console.WriteLine($"Current Error: {antError}");
+    Console.WriteLine();
+
+
     var evoSolver = new EvoSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
 
     var evoResult = evoSolver.Solve();
@@ -531,8 +576,23 @@ static void RunSolvers(double evaporationRate, BagSolverDinamic.DenModels.Task t
     streamWriter.WriteLine(evoResult.ToString());
 
 
+
+    var evoError = Math.Abs(correctPValue / evoResult.Power * 100 - 100);
+    avgEvoError = (avgEvoError + evoError) / 2;
+
+    Console.WriteLine($"Current Error: {evoError}");
+    Console.WriteLine();
+
     var greSolver = new GreSolver(task.Locations, task.Costs, task.Powers, task.Budget, task.MinDist);
     var greResult = greSolver.Solve();
     Console.WriteLine(greResult.ToString());
     streamWriter.WriteLine(greResult.ToString());
+
+
+    var greError = Math.Abs(correctPValue / greResult.Power * 100 - 100);
+    avgGreError = (avgGreError + greError) / 2;
+
+    Console.WriteLine($"Current Error: {greError}");
+    Console.WriteLine();
+
 }
